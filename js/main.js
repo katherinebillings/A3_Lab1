@@ -3,8 +3,7 @@
   var Img = document.querySelectorAll('.data-ref'),
   model = document.querySelector('.modelName'),
   price = document.querySelector('.priceInfo'),
-  details = document.querySelector('.modelDetails'),
-  appliedClass;
+  details = document.querySelector('.modelDetails');
 
   function changeModel () {
     //debugger;
@@ -16,18 +15,13 @@
     details.firstChild.nodeValue = objectIndex.description;
 
     //opacity change
-    debugger
-    for (var i = 0; i < Img.length; i++) {
-      if (this.id !== Img.dataset.index) {
-        i.classList.remove("focusMini");
-      }
-    }
-    this.classList.remove("nonActive");
+    
+    Img.forEach(function(element, index) {
+      element.classList.remove("focusMini");
+    });
     this.classList.add("focusMini");
 
-    appliedClass = this.id;
-
-    console.log(this.id);
+    //console.log(this.id);
   }
 
   Img.forEach(function(element, index) {
