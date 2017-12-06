@@ -14,22 +14,22 @@
         console.log(error);
       });*/
 
-    fetch(url) // this does the AJAX call
-        .then((resp) => resp.json())
-        .then(({ modelName, pricing, modelDetails, model })) => {
-              let model = document.querySelector('.modelName').textContent = modelName;
-              let price = document.querySelector('.priceInfo').innerHTML = pricing;
-              let desc = document.querySelector('.modelDetails').textContent = modelDetails;
+      fetch(url) // do our ajax call
+        .then((resp) => resp.json()) // convert the response to JSON (built-in method)
+        .then(({ modelName, pricing, modelDetails, model }) => {
+          //const { modelName, pricing, modelDetails } = data;
 
-              carButtons.forEach(function(car, index) {
-                car.classList.add('nonActive');
-              });
-              // the backticks are a new ES6 thing called a template string (look it up)
-              document.querySelector(`#${data.model}`).classList.remove('nonActive');
-            }
-        )
+          let carModel = document.querySelector('.modelName').textContent = modelName;
+          let price = document.querySelector('.priceInfo').innerHTML = pricing;
+          let desc = document.querySelector('.modelDetails').textContent = modelDetails;
+
+          // refactor this with an arrow function (shorthand function declaration)
+          carButtons.forEach(car => car.classList.add('nonActive'));
+
+          document.querySelector(`#${model}`).classList.remove('nonActive');
+         }) // then do the process result function
         .catch(function(error) {
-          console.log(error);
+          console.log(error); // catch any errors and show them in the console
         });
   }
 
