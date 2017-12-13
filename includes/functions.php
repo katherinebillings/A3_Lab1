@@ -1,4 +1,4 @@
-<?
+<?php
 // do the connection first, then write a query
 $user = "root";
 $pass = "root";
@@ -6,13 +6,14 @@ $host = "localhost";
 $db = "a3_cooperInfo";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
+mysqli_set_charset($conn, 'utf8');
 
 if (!$conn) {
   echo 'sumpin done gone wrong, son';
   exit;
 }
 
-echo 'connected, yo!';
+//echo 'connected, yo!';
 // 1. do a select for all of the car data
 //
 // $myQuery = "SELECT * FROM mainmodel";
@@ -48,5 +49,21 @@ if (isset($_GET["carModel"])) { // check to see if a query parameter exists
   //var_dump($row);
   // and then encode it for the javascript AJAX call
   echo json_encode($row);
-};
+}
+
+if (isset($_GET['getVideos'])) {
+  $myQuery = "SELECT * FROM video";  // this is a simple SQL query
+  $result = mysqli_query($conn, $myQuery);  // result holds the result set
+
+  $rows = array();
+
+  while($row = mysqli_fetch_assoc($result)) {
+    $rows[] = $row;
+  }
+
+  echo json_encode($rows);
+  // echo it back to whatever called it (the browser, to start)
+  //var_dump($row);
+  // and then encode it for the javascript AJAX call
+}
 ?>
